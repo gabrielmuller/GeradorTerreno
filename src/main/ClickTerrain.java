@@ -1,3 +1,4 @@
+package main;
 
 import java.awt.MouseInfo;
 import java.awt.Point;
@@ -16,10 +17,13 @@ import javax.swing.SwingUtilities;
  *
  * @author 10505053950
  */
-public class CliqueTerreno implements MouseListener {
-    AlteraCor alt;
-    public CliqueTerreno(AlteraCor alt) {
-        this.alt = alt;
+public class ClickTerrain implements MouseListener {
+    ColorChanger changeColor;
+    Terrain mainTerrain;
+    
+    public ClickTerrain(ColorChanger alt, Terrain mainTerrain) {
+        this.changeColor = alt;
+        this.mainTerrain = mainTerrain;
     }
     @Override
     public void mouseClicked(MouseEvent e) {
@@ -28,8 +32,8 @@ public class CliqueTerreno implements MouseListener {
         SwingUtilities.convertPointFromScreen(point, e.getComponent());
         int x = (int) point.getX();
         int y = (int) point.getY();
-        alt.alterarCor(x, y);
-                
+        changeColor.changeColor(x, y);
+        mainTerrain.update();
     }
 
     @Override
