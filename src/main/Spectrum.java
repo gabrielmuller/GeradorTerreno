@@ -29,19 +29,18 @@ public class Spectrum {
         if (index+1 >= colors.length) {
         	index = colors.length - 2;
         }
-        if (index+1 == colors.length) {
-        	System.out.println("size: " + size + " height: " + height + " index: " + index);
-        }
+
         float fraction = size * height - index;
-        Color resultado;
+        Color result;
 
         if (interpolate) {
-            resultado = Spectrum.colorInterpolate(colors[index], colors[index + 1], fraction);
+            result = Spectrum.colorInterpolate(colors[index], colors[index + 1], fraction);
         } else {
             if (fraction > 0.5) {
                 index = index + 1;
             }
-            resultado = colors[index];
+            result = colors[index];
+
         }
 
         if (colors == negativeColors) {
@@ -49,7 +48,7 @@ public class Spectrum {
             //para passar info que eh abaixo do mar
             index = Utility.twosComplement(index);
         }
-        return new ColorInfo(resultado, index);
+        return new ColorInfo(result, index);
     }
 
     public void changeColor(int index, Color cor) {
