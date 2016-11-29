@@ -3,23 +3,13 @@ package main;
 import java.awt.Color;
 import javax.swing.JColorChooser;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
-/**
- *
- * @author 10505053950
- */
 public class Editor {
     private Interface interf;
     private Spectrum spectrum;
     private TerrainCreator tc;
 
     public Editor(Interface interf, Spectrum spectrum, TerrainCreator terreno) {
-        //this.colorChooser = colorChooser;
         this.spectrum = spectrum;
         this.tc = terreno;
         this.interf = interf;
@@ -32,8 +22,9 @@ public class Editor {
         i/=2;
         j/=2;
     	if (interf.isChangingColor()) {
-	        float value = tc.valueAtPoint(i, j);
+	        float value = tc.fixedTerrain.getHeightAt(i, j);
 	        int index = spectrum.colorAtHeight(value).index;
+	        System.out.println(index);
 	        spectrum.changeColor(index, interf.getSelectedColor());
 	        tc.createTerrainPreview();
     	} else {
