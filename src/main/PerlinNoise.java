@@ -47,11 +47,12 @@ public class PerlinNoise {
       this.canvasWidth = w;
       this.canvasHeight = h;
    }
-   public float fractalNoise(float x, float y) {
+   public float fractalNoise(float x, float y, float zoom) {
 	   float resultado = 0;
 	   int iters = (int) Math.floor(Math.log(width)/Math.log(2));
 	   for (int i = 0; i < iters-1; i++) {
 		   float scale = (float) Math.pow(2, iters-i);
+                   scale *= zoom;
 		   float ratio = (float) Math.pow(2, -i);
 		   resultado += noise(x / scale, y / scale)*ratio;
 	   }

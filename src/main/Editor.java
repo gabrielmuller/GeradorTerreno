@@ -13,27 +13,36 @@ import javax.swing.JColorChooser;
  *
  * @author 10505053950
  */
-public class ColorChanger {
+public class Editor {
     private Interface interf;
     private Spectrum spectrum;
-    private Terrain terrain;
+    private TerrainCreator tc;
 
-    public ColorChanger(Interface interf, Spectrum spectrum, Terrain terreno) {
+    public Editor(Interface interf, Spectrum spectrum, TerrainCreator terreno) {
         //this.colorChooser = colorChooser;
         this.spectrum = spectrum;
-        this.terrain = terreno;
+        this.tc = terreno;
         this.interf = interf;
     }
     
    
-    public void changeColor(int i, int j) {
+    public void edit(int i, int j, boolean negative) {
+        i -= tc.margin;
+        j -= tc.margin;
+        i/=2;
+        j/=2;
     	if (interf.isChangingColor()) {
-	        i -= terrain.margin;
-	        j -= terrain.margin;
-	        float value = terrain.valueAtPoint(i, j);
+	        float value = tc.valueAtPoint(i, j);
 	        int index = spectrum.colorAtHeight(value).index;
 	        spectrum.changeColor(index, interf.getSelectedColor());
-	        terrain.createTerrain();
+	        tc.createTerrainPreview();
+    	} else {
+    		Terrain t = tc.fixedTerrain;
+    		float thickness = 20;
+    		float intensity = 0.9f;
+    		int multiplier = negative ? -1 : 1;
+    		t.edit(thickness, intensity * multiplier, new Point (i, j));
+    		tc.update(t);
     	}
     }
 }
