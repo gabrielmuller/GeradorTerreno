@@ -18,7 +18,7 @@ public class Interface extends JPanel {
     JCheckBox changeColorCheckbox, islandCheckbox;
     JColorChooser colorChooser;
     JSlider seaLevelSlider, zoomSlider;
-    JButton updateButton;
+    JButton updateButton, editButton;
     JTextField seedInput;
     float minZoom = 0.3f;
     float maxZoom = 3f;
@@ -64,21 +64,18 @@ public class Interface extends JPanel {
         //c.gridheight = 2;
         add(updateButton, c);
 
-        c.gridx = 0;
         c.gridy = 4;
         add(seaLevelSlider, c);
 
-        c.gridx = 0;
         c.gridy = 5;
         add(zoomSlider, c);
 
-        c.gridx = 0;
         c.gridy = 6;
         add(seedInput, c);
 
-        c.gridx = 0;
         c.gridy = 7;
         add(colorChooser, c);
+        
 
     }
 
@@ -95,7 +92,7 @@ public class Interface extends JPanel {
     }
 
     public float getSeaLevel() {
-        return seaLevelSlider.getValue() / (float) sliderSize;
+        return seaLevelSlider.getValue() / ((float) sliderSize);
     }
 
     public long getSeed() {

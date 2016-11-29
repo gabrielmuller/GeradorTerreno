@@ -14,7 +14,8 @@ public class Main {
 		frame.setLayout(layout);
 		Interface i = new Interface();
 		frame.getContentPane().add(i);
-		frame.getContentPane().add(new Terrain(i));
+		TerrainCreator tc = new TerrainCreator(i);
+		frame.getContentPane().add(tc.visualizer);
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(1500, 800);

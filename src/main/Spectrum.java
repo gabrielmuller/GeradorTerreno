@@ -13,12 +13,10 @@ public class Spectrum {
     public Spectrum(Color[] n, Color[] p) {
         negativeColors = n;
         positiveColors = p;
-        seaLevel = 0;
     }
 
     public ColorInfo colorAtHeight(float height) {
         Color[] colors;
-        height = Utility.changeZero(height, seaLevel);
 
         if (height < 0) {
             height *= -1;
@@ -28,13 +26,19 @@ public class Spectrum {
         }
         int size = colors.length - 1;
         int index = (int) Math.floor(size * height);
+        if (index+1 >= colors.length) {
+        	index = colors.length - 2;
+        }
+        if (index+1 == colors.length) {
+        	System.out.println("size: " + size + " height: " + height + " index: " + index);
+        }
         float fraction = size * height - index;
         Color resultado;
 
         if (interpolate) {
             resultado = Spectrum.colorInterpolate(colors[index], colors[index + 1], fraction);
         } else {
-            if (fraction > 0.2) {
+            if (fraction > 0.5) {
                 index = index + 1;
             }
             resultado = colors[index];

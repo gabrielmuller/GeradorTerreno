@@ -15,4 +15,13 @@ public final class Utility {
             }
             return value;
         }
+        
+        public static float clamp(float value, float min, float max) {
+        	if (value > max) {
+        		value = max;
+        	} else if (value < min) {
+        		value = min;
+        	}
+        	return value;
+        }
 }

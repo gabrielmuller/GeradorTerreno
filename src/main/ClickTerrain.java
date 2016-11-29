@@ -18,11 +18,11 @@ import javax.swing.SwingUtilities;
  * @author 10505053950
  */
 public class ClickTerrain implements MouseListener {
-    ColorChanger changeColor;
-    Terrain mainTerrain;
+    Editor editor;
+    Visualizer mainTerrain;
     
-    public ClickTerrain(ColorChanger alt, Terrain mainTerrain) {
-        this.changeColor = alt;
+    public ClickTerrain(Editor alt, Visualizer mainTerrain) {
+        this.editor = alt;
         this.mainTerrain = mainTerrain;
     }
     @Override
@@ -32,8 +32,8 @@ public class ClickTerrain implements MouseListener {
         SwingUtilities.convertPointFromScreen(point, e.getComponent());
         int x = (int) point.getX();
         int y = (int) point.getY();
-        changeColor.changeColor(x, y);
-        mainTerrain.update();
+        editor.edit(x, y, SwingUtilities.isRightMouseButton(e));
+        mainTerrain.preview();
     }
 
     @Override
