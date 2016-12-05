@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 
 public class TerrainCreator {
 
@@ -121,12 +122,17 @@ public class TerrainCreator {
 			return;
 
 		File input = jfc.getSelectedFile();
-		TerrainInput ti = new TerrainInput(input.getAbsolutePath());
-		Terrain t = new Terrain(size);
-		TerrainInfo tinfo = ti.fileToFloatMatrix(fixedTerrain.size());
-		t.elevation = tinfo.elevation;
-		visualizer.spectrum = tinfo.spectrum;
-		update(t);
+		
+		if (input.getAbsolutePath().contains(".ter")) {
+			TerrainInput ti = new TerrainInput(input.getAbsolutePath());
+			Terrain t = new Terrain(size);
+			TerrainInfo tinfo = ti.fileToFloatMatrix(fixedTerrain.size());
+			t.elevation = tinfo.elevation;
+			visualizer.spectrum = tinfo.spectrum;
+			update(t);
+		} else {
+			JOptionPane.showMessageDialog(null, "Arquivo inválido. Selecione um arquivo tipo .ter .");
+		}
 		
 	}
 
