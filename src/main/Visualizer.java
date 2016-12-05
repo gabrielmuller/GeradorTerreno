@@ -13,11 +13,12 @@ import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
 public class Visualizer extends JPanel {
-	private Image img;
+	Image img;
 	private int margin;
 	
 	Terrain terrain;
 	Spectrum spectrum;
+	
 	
 	public Visualizer(Spectrum spectrum) {
 		margin = 20;
@@ -35,7 +36,7 @@ public class Visualizer extends JPanel {
 		spectrum.interpolate = b;
 	}
 	
-	public void preview() {
+	public BufferedImage preview() {
 		int size = terrain.size();
 		BufferedImage bufferedImage = new BufferedImage(size, size, BufferedImage.TYPE_INT_RGB);
 
@@ -47,12 +48,13 @@ public class Visualizer extends JPanel {
 				
 			}
 		}
-		//teste
+		/*teste
 			PNGSaver p = new PNGSaver("C:/teste/teste.png");
 			p.save(bufferedImage);
-		//\teste
+		*/
 		img = bufferedImage;
 		repaint();
+		return bufferedImage;
 	}
 	
 	public void paintComponent(Graphics g) {

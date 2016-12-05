@@ -4,6 +4,9 @@ import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+
+import javax.swing.JFileChooser;
 
 public class TerrainCreator {
 
@@ -43,13 +46,23 @@ public class TerrainCreator {
 
 		});
 
-		interf.temp.addActionListener(new ActionListener() {
+		interf.saveButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				saveTerrain();
 			}
 
+		});
+		
+		interf.openButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				loadTerrain();
+			}
+
+			
 		});
 		
 		interf.islandCheckbox.addActionListener(new ActionListener() {
@@ -80,12 +93,35 @@ public class TerrainCreator {
 	}
 
 	public void saveTerrain() {
-		TerrainOutput to = new TerrainOutput("C:/teste/teste.ter");
+
+		JFileChooser jfc = new JFileChooser();
+		if (!(jfc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION))
+			return;
+		File input = jfc.getSelectedFile();
+		String path = input.getAbsolutePath();
+		
+		TerrainOutput to = new TerrainOutput(path);
 		to.writeFile(fixedTerrain.elevation, visualizer.spectrum);
+
+		if (path.contains(".")){
+			int index = path.indexOf(".");
+			path = path.substring(0, index);
+			path = path.concat(".png");
+		}
+		
+		PNGSaver p = new PNGSaver(path);
+		p.save(visualizer.preview());
 	}
 	
 	public void loadTerrain() {
-		TerrainInput ti = new TerrainInput("C:/teste/teste.ter");
+		
+		JFileChooser jfc = new JFileChooser();
+
+		if (!(jfc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION))
+			return;
+
+		File input = jfc.getSelectedFile();
+		TerrainInput ti = new TerrainInput(input.getAbsolutePath());
 		Terrain t = new Terrain(size);
 		TerrainInfo tinfo = ti.fileToFloatMatrix(fixedTerrain.size());
 		t.elevation = tinfo.elevation;
