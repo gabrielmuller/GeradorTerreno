@@ -11,8 +11,7 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
 
-import java.awt.Graphics;
-
+@SuppressWarnings("serial")
 public class Visualizer extends JPanel {
 	private Image img;
 	private int margin;

@@ -1,12 +1,13 @@
 package main;
 
 import java.awt.GridLayout;
+import java.io.IOException;
 
 import javax.swing.JFrame;
 
 public class Main {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 
 		JFrame frame = new JFrame();
 		GridLayout layout = new GridLayout(1, 2);
@@ -21,6 +22,8 @@ public class Main {
 		frame.setSize(1500, 800);
 		//frame.pack();
 		frame.setVisible(true);
+		
+
 
 	}
 

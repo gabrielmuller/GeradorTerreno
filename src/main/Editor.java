@@ -1,17 +1,13 @@
 package main;
 
-import java.awt.Color;
-import javax.swing.JColorChooser;
-
-
 public class Editor {
     private Interface interf;
     private Spectrum spectrum;
     private TerrainCreator tc;
 
-    public Editor(Interface interf, Spectrum spectrum, TerrainCreator terreno) {
+    public Editor(Interface interf, Spectrum spectrum, TerrainCreator tc) {
         this.spectrum = spectrum;
-        this.tc = terreno;
+        this.tc = tc;
         this.interf = interf;
     }
     
@@ -26,13 +22,13 @@ public class Editor {
 	        int index = spectrum.colorAtHeight(value).index;
 	        System.out.println(index);
 	        spectrum.changeColor(index, interf.getSelectedColor());
-	        tc.createTerrainPreview();
+	        //tc.createTerrainPreview();
     	} else {
     		Terrain t = tc.fixedTerrain;
-    		float thickness = 20;
-    		float intensity = 0.9f;
+    		float size = interf.getBrushSize();
+    		float weight = interf.getBrushWeight();
     		int multiplier = negative ? -1 : 1;
-    		t.edit(thickness, intensity * multiplier, new Point (i, j));
+    		t.edit(size, weight * multiplier, new Point (i, j));
     		tc.update(t);
     	}
     }

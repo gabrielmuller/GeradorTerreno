@@ -19,52 +19,43 @@ public class Terrain {
 	public float getHeightAt(int i, int j) {
 		return elevation[i][j];
 	}
-	public void iterate(MatrixProcessor processor, Processing processing) {
+	public void iterate(MatrixProcessor processor) {
 		for (int i = 0; i < elevation.length; i++) {
 			for (int j = 0; j < elevation.length; j++) {
-				processing.input = elevation[i][j];
-				processing.i = i;
-				processing.j = j;
-				processor.process(processing);
-				elevation[i][j] = processing.output;
+				processor.input = elevation[i][j];
+				processor.i = i;
+				processor.j = j;
+				processor.process();
+				elevation[i][j] = processor.output;
 			}
 		}
 	}
 	
 	public float largestValue() {
-		float output = 0;
-		ProcessingLargest processing = new ProcessingLargest();
-		LargestProcessor processor = new LargestProcessor();
-		iterate(processor, processing);
-		output = processing.largest;
-		return output;
+		PLargest processor = new PLargest();
+		iterate(processor);
+		return processor.largest;
 	}
 	
 	public float smallestValue() {
-		float output = 0;
-		ProcessingSmallest processing = new ProcessingSmallest();
-		SmallestProcessor processor = new SmallestProcessor();
-		iterate(processor, processing);
-		output = processing.smallest;
-		return output;
+		PSmallest processor = new PSmallest();
+		iterate(processor);
+		return processor.smallest;
 	}
 	
 	public void normalize () {
-		ProcessingNormalizer processing = new ProcessingNormalizer();
-		NormalizerProcessor processor = new NormalizerProcessor(smallestValue(), largestValue());
-		iterate(processor, processing);
+		PNormalizer processor = new PNormalizer(smallestValue(), largestValue());
+		iterate(processor);
 	}
 	
 	public void level(float level) {
-		ProcessingSeaLevel processing = new ProcessingSeaLevel();
-		SeaLevelProcessor processor = new SeaLevelProcessor(level);
-		iterate(processor, processing);
+		PSeaLevel processor = new PSeaLevel(level);
+		iterate(processor);
 	}
 	
 	public void edit (float radius, float maxChange, Point center) {
-		ProcessingEdit processing = new ProcessingEdit();
-		EditProcessor processor = new EditProcessor(radius, maxChange, center);
-		iterate(processor, processing);
+		PEdit processor = new PEdit(radius, maxChange, center);
+		iterate(processor);
 	}
 	public int size () {
 		return elevation.length;

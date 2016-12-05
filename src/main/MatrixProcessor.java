@@ -1,5 +1,10 @@
 package main;
 
-public interface MatrixProcessor {
-	void process (Processing p);
+public abstract class MatrixProcessor {
+	float input;
+	float output;
+	int i, j;
+	void process () {
+		
+	};
 }

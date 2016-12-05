@@ -1,13 +1,9 @@
 package main;
 
 import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-
-import javax.swing.JPanel;
 
 public class TerrainCreator {
 
@@ -21,7 +17,6 @@ public class TerrainCreator {
 	int size;
 	boolean island;
 	public int margin;
-	public Spectrum spectrum;
 
 	boolean fixed;
 	Terrain fixedTerrain;
@@ -48,6 +43,15 @@ public class TerrainCreator {
 
 		});
 
+		interf.temp.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				saveTerrain();
+			}
+
+		});
+		
 		interf.islandCheckbox.addActionListener(new ActionListener() {
 
 			@Override
@@ -63,20 +67,34 @@ public class TerrainCreator {
 		seaLevel = 0;
 		Color[] pos = { new Color(239, 235, 201), new Color(115, 196, 78), new Color(237, 247, 255)};
 		Color[] neg = { new Color(110, 173, 221), new Color(22, 58, 86)};
-		spectrum = new Spectrum(neg, pos);
+		Spectrum spectrum = new Spectrum(neg, pos);
 
-		Editor cc = new Editor(i, spectrum, this);
 
 
         visualizer = new Visualizer(spectrum);
+		Editor cc = new Editor(i, visualizer.spectrum, this);
+
         visualizer.addClickListener(cc);
         update();
 
 	}
 
+	public void saveTerrain() {
+		TerrainOutput to = new TerrainOutput("C:/teste/teste.ter");
+		to.writeFile(fixedTerrain.elevation, visualizer.spectrum);
+	}
+	
+	public void loadTerrain() {
+		TerrainInput ti = new TerrainInput("C:/teste/teste.ter");
+		Terrain t = new Terrain(size);
+		TerrainInfo tinfo = ti.fileToFloatMatrix(fixedTerrain.size());
+		t.elevation = tinfo.elevation;
+		visualizer.spectrum = tinfo.spectrum;
+		update(t);
+		
+	}
 
-
-	public void createTerrainPreview() {
+	/*public void createTerrainPreview() {
 		seed = interf.getSeed();
 		island = interf.isIsland();
 		zoom = interf.getZoom();
@@ -96,7 +114,7 @@ public class TerrainCreator {
 		}
 
 		img = bufferedImage;
-	}
+	}*/
 
 	Terrain createTerrain() {
         seed = interf.getSeed();

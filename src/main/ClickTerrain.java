@@ -21,8 +21,8 @@ public class ClickTerrain implements MouseListener {
     Editor editor;
     Visualizer mainTerrain;
     
-    public ClickTerrain(Editor alt, Visualizer mainTerrain) {
-        this.editor = alt;
+    public ClickTerrain(Editor editor, Visualizer mainTerrain) {
+        this.editor = editor;
         this.mainTerrain = mainTerrain;
     }
     @Override

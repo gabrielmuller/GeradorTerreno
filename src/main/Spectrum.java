@@ -1,8 +1,10 @@
 package main;
 
 import java.awt.Color;
+import java.io.Serializable;
 
-public class Spectrum {
+@SuppressWarnings("serial")
+public class Spectrum implements Serializable {
 
     private final Color[] positiveColors;
     private final Color[] negativeColors;
@@ -51,7 +53,7 @@ public class Spectrum {
         return new ColorInfo(result, index);
     }
 
-    public void changeColor(int index, Color cor) {
+    public void changeColor(int index, Color color) {
         Color[] colors;
         if (index < 0) {
             index = Utility.twosComplement(index);
@@ -60,7 +62,7 @@ public class Spectrum {
             colors = positiveColors;
         }
 
-        colors[index] = cor;
+        colors[index] = color;
     }
 
     public static Color colorInterpolate(Color a, Color b, float f) {
@@ -70,7 +72,6 @@ public class Spectrum {
         for (int i = 0; i < resultInFloats.length; i++) {
             resultInFloats[i] = (float) Math.sqrt(Math.pow(aInFloats[i], 2) * (1-f) + Math.pow(bInFloats[i], 2) * f);
         }
-
         return Spectrum.arrayToColor(resultInFloats);
     }
 
