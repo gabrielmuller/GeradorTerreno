@@ -44,10 +44,13 @@ public class Visualizer extends JPanel {
 				float value = terrain.getHeightAt(i, j);
 				Color thisColor = spectrum.colorAtHeight(value).color;
 				bufferedImage.setRGB(i, j, thisColor.getRGB());
-
+				
 			}
 		}
-
+		//teste
+			PNGSaver p = new PNGSaver("C:/teste/teste.png");
+			p.save(bufferedImage);
+		//\teste
 		img = bufferedImage;
 		repaint();
 	}
