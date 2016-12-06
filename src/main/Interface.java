@@ -58,8 +58,8 @@ public class Interface extends JPanel {
 		brushSizeSlider.setValue(-50);
 		brushWeightSlider.setValue(-50);
 		
-		openButton.setText("Open");
-		saveButton.setText("Save");
+		openButton.setText("Abrir");
+		saveButton.setText("Salvar");
 		updateButton.setText("Atualizar");
 		seedInput.setText("seed");
 		oldInput = seedInput.getText();
@@ -128,7 +128,7 @@ public class Interface extends JPanel {
 		add(Box.createRigidArea(new Dimension(50, 20)), c);
 		
 		c.gridy = 3; 
-		sliderLabel = new JLabel("Brush Size", JLabel.CENTER);
+		sliderLabel = new JLabel("Tamanho do pincel", JLabel.CENTER);
 		add(sliderLabel, c);
 		
 		c.gridy = 4;
@@ -136,7 +136,7 @@ public class Interface extends JPanel {
 		
 		add(Box.createRigidArea(new Dimension(50, 50)), c);
 		c.gridy = 5;
-		sliderLabel = new JLabel("Brush Weight", JLabel.CENTER);
+		sliderLabel = new JLabel("Intensidade do pincel", JLabel.CENTER);
 		add(sliderLabel, c);
 		
 		c.gridy = 6;
@@ -158,7 +158,7 @@ public class Interface extends JPanel {
 		add(Box.createRigidArea(new Dimension(50, 20)), c);
 		
 		c.gridy = 3;
-		sliderLabel = new JLabel("Sea Level", JLabel.CENTER);
+		sliderLabel = new JLabel("Nível do mar", JLabel.CENTER);
 		add(sliderLabel, c);
 		
 		c.gridy = 4;

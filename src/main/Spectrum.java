@@ -6,8 +6,8 @@ import java.io.Serializable;
 @SuppressWarnings("serial")
 public class Spectrum implements Serializable {
 
-    private final Color[] positiveColors;
-    private final Color[] negativeColors;
+    private Color[] positiveColors;
+    private Color[] negativeColors;
     public float seaLevel;
 
     public boolean interpolate;
@@ -16,7 +16,11 @@ public class Spectrum implements Serializable {
         negativeColors = n;
         positiveColors = p;
     }
-
+    
+    void clone (Spectrum s) {
+    	this.positiveColors = s.positiveColors;
+    	this.negativeColors = s.negativeColors;
+    }
     public ColorInfo colorAtHeight(float height) {
         Color[] colors;
 

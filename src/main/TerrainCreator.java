@@ -8,6 +8,7 @@ import java.io.File;
 
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class TerrainCreator {
 
@@ -94,13 +95,19 @@ public class TerrainCreator {
 	}
 
 	public void saveTerrain() {
-
-		JFileChooser jfc = new JFileChooser();
-		if (!(jfc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION))
+		JFileChooser jfc = new TerrainFileChooser(false);
+		
+		if (jfc.showOpenDialog(null) != JFileChooser.APPROVE_OPTION)
 			return;
+		
 		File input = jfc.getSelectedFile();
+		
+		
 		String path = input.getAbsolutePath();
 		
+		if (!path.endsWith(".ter")) {
+			path = path + ".ter";
+		}
 		TerrainOutput to = new TerrainOutput(path);
 		to.writeFile(fixedTerrain.elevation, visualizer.spectrum);
 
@@ -116,47 +123,26 @@ public class TerrainCreator {
 	
 	public void loadTerrain() {
 		
-		JFileChooser jfc = new JFileChooser();
-
-		if (!(jfc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION))
+		JFileChooser jfc = new TerrainFileChooser(true);
+		
+		if (jfc.showOpenDialog(null) != JFileChooser.APPROVE_OPTION)
 			return;
-
+		
 		File input = jfc.getSelectedFile();
 		
-		if (input.getAbsolutePath().contains(".ter")) {
+
+		if (input.toString().endsWith(".ter")) {
 			TerrainInput ti = new TerrainInput(input.getAbsolutePath());
 			Terrain t = new Terrain(size);
 			TerrainInfo tinfo = ti.fileToFloatMatrix(fixedTerrain.size());
 			t.elevation = tinfo.elevation;
-			visualizer.spectrum = tinfo.spectrum;
+			visualizer.spectrum.clone(tinfo.spectrum);
 			update(t);
 		} else {
 			JOptionPane.showMessageDialog(null, "Arquivo inválido. Selecione um arquivo tipo .ter .");
 		}
 		
 	}
-
-	/*public void createTerrainPreview() {
-		seed = interf.getSeed();
-		island = interf.isIsland();
-		zoom = interf.getZoom();
-		map = new PerlinNoise(size, size, seed);
-		spectrum.interpolate = !interf.isChangingColor();
-		seaLevel = interf.getSeaLevel();
-		BufferedImage bufferedImage = new BufferedImage(size, size, BufferedImage.TYPE_INT_RGB);
-		Color c = Color.red;
-		bufferedImage.setRGB(0, 0, c.getRGB());
-
-		for (int i = 0; i < size; i++) {
-			for (int j = 0; j < size; j++) {
-				float value = valueAtPoint(i, j);
-				Color thisColor = spectrum.colorAtHeight(value).color;
-				bufferedImage.setRGB(i, j, thisColor.getRGB());
-			}
-		}
-
-		img = bufferedImage;
-	}*/
 
 	Terrain createTerrain() {
         seed = interf.getSeed();

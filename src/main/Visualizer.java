@@ -17,7 +17,7 @@ public class Visualizer extends JPanel {
 	private int margin;
 	
 	Terrain terrain;
-	Spectrum spectrum;
+	final Spectrum spectrum;
 	
 	
 	public Visualizer(Spectrum spectrum) {
