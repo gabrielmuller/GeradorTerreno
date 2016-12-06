@@ -8,7 +8,6 @@ import java.io.File;
 
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class TerrainCreator {
 
@@ -55,6 +54,15 @@ public class TerrainCreator {
 				saveTerrain();
 			}
 
+		});
+		
+		interf.pngButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				savePng();
+			}
+			
 		});
 		
 		interf.openButton.addActionListener(new ActionListener() {
@@ -110,6 +118,17 @@ public class TerrainCreator {
 		}
 		TerrainOutput to = new TerrainOutput(path);
 		to.writeFile(fixedTerrain.elevation, visualizer.spectrum);
+	}
+	
+	public void savePng() {
+		JFileChooser jfc = new TerrainFileChooser(false);
+		
+		if (jfc.showOpenDialog(null) != JFileChooser.APPROVE_OPTION)
+			return;
+		
+		File input = jfc.getSelectedFile();
+		
+		String path = input.getAbsolutePath();
 
 		if (path.contains(".")){
 			int index = path.indexOf(".");
@@ -139,7 +158,7 @@ public class TerrainCreator {
 			visualizer.spectrum.clone(tinfo.spectrum);
 			update(t);
 		} else {
-			JOptionPane.showMessageDialog(null, "Arquivo inválido. Selecione um arquivo tipo .ter .");
+			JOptionPane.showMessageDialog(null, "Arquivo invï¿½lido. Selecione um arquivo tipo .ter .");
 		}
 		
 	}

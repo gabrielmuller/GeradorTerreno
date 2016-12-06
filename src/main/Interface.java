@@ -26,7 +26,7 @@ public class Interface extends JPanel {
 	JColorChooser colorChooser;
 	JSlider seaLevelSlider, zoomSlider, brushSizeSlider, brushWeightSlider;
 	JLabel sliderLabel;
-	JButton updateButton, generateSeedButton, openButton, saveButton;
+	JButton updateButton, generateSeedButton, openButton, saveButton, pngButton;
 	JTextField seedInput;
 	float minZoom = 0.3f;
 	float maxZoom = 3f;
@@ -48,22 +48,19 @@ public class Interface extends JPanel {
 		brushSizeSlider = new JSlider(-sliderSize, sliderSize, 0);
 		brushWeightSlider = new JSlider(-sliderSize, sliderSize, 0);
 		
-		saveButton = new JButton();
-		openButton = new JButton();
-		updateButton = new JButton();
-		generateSeedButton = new JButton();
+		saveButton = new JButton("Salvar");
+		openButton = new JButton("Abrir");
+		pngButton = new JButton("Exportar em PNG");
+		updateButton = new JButton("Atualizar");
+		generateSeedButton = new JButton("Gerar seed");
 
 		seedInput = new JTextField();
 
 		brushSizeSlider.setValue(-50);
 		brushWeightSlider.setValue(-50);
 		
-		openButton.setText("Abrir");
-		saveButton.setText("Salvar");
-		updateButton.setText("Atualizar");
 		seedInput.setText("seed");
 		oldInput = seedInput.getText();
-		generateSeedButton.setText("Gerar seed");
 
 		changeColorCheckbox.setText("Mudar cores");
 		islandCheckbox.setText("Modo ilha");
@@ -158,7 +155,7 @@ public class Interface extends JPanel {
 		add(Box.createRigidArea(new Dimension(50, 20)), c);
 		
 		c.gridy = 3;
-		sliderLabel = new JLabel("Nível do mar", JLabel.CENTER);
+		sliderLabel = new JLabel("Nï¿½vel do mar", JLabel.CENTER);
 		add(sliderLabel, c);
 		
 		c.gridy = 4;
@@ -190,6 +187,8 @@ public class Interface extends JPanel {
 		add(openButton, c);
 		c.gridx = 2;
 		add(saveButton, c);
+		c.gridy = 11;
+		add(pngButton, c);
 
 	}
 
