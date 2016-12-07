@@ -19,23 +19,23 @@ import javax.swing.event.DocumentListener;
  *
  * @author 10505053950
  */
-@SuppressWarnings("serial") class Interface extends JPanel {
+@SuppressWarnings("serial")
+public class Interface extends JPanel {
 
 	JCheckBox changeColorCheckbox, islandCheckbox;
-	private JColorChooser colorChooser;
-	private JSlider seaLevelSlider, zoomSlider, brushSizeSlider, brushWeightSlider;
-	private JLabel sliderLabel;
-	JButton updateButton, saveButton, openButton;
-	private JButton generateSeedButton;
-	private JTextField seedInput;
-	private float minZoom = 0.3f;
-	private float maxZoom = 3f;
-	private String oldInput;
-	private int sliderSize = 100;
+	JColorChooser colorChooser;
+	JSlider seaLevelSlider, zoomSlider, brushSizeSlider, brushWeightSlider;
+	JLabel sliderLabel;
+	JButton updateButton, generateSeedButton, openButton, saveButton, pngButton;
+	JTextField seedInput;
+	float minZoom = 0.3f;
+	float maxZoom = 3f;
+	String oldInput;
+	int sliderSize = 100;
 
-	Interface() {
+	public Interface() {
 		super(new GridBagLayout());
-		GridBagConstraints gridBag = new GridBagConstraints();
+		GridBagConstraints c = new GridBagConstraints();
 
 		colorChooser = new JColorChooser();
 		//colorChooser.setPreviewPanel(new JPanel());
@@ -48,22 +48,19 @@ import javax.swing.event.DocumentListener;
 		brushSizeSlider = new JSlider(-sliderSize, sliderSize, 0);
 		brushWeightSlider = new JSlider(-sliderSize, sliderSize, 0);
 		
-		saveButton = new JButton();
-		openButton = new JButton();
-		updateButton = new JButton();
-		generateSeedButton = new JButton();
+		saveButton = new JButton("Salvar");
+		openButton = new JButton("Abrir");
+		pngButton = new JButton("Exportar em PNG");
+		updateButton = new JButton("Atualizar");
+		generateSeedButton = new JButton("Gerar seed");
 
 		seedInput = new JTextField();
 
 		brushSizeSlider.setValue(-50);
 		brushWeightSlider.setValue(-50);
 		
-		openButton.setText("Abrir");
-		saveButton.setText("Salvar");
-		updateButton.setText("Atualizar");
 		seedInput.setText("seed");
 		oldInput = seedInput.getText();
-		generateSeedButton.setText("Gerar seed");
 
 		changeColorCheckbox.setText("Mudar cores");
 		islandCheckbox.setText("Modo ilha");
@@ -94,7 +91,7 @@ import javax.swing.event.DocumentListener;
 				fix();
 			}
 
-			void fix() {
+			public void fix() {
 				Runnable fixer = new Runnable() {
 					@Override
 					public void run() {
@@ -116,100 +113,102 @@ import javax.swing.event.DocumentListener;
 		 */
 		
 		/*		coluna 0		*/
-		gridBag.fill = GridBagConstraints.HORIZONTAL;
-		gridBag.gridx = 0; 
-		gridBag.gridy = 0; //linha 0
-		add(changeColorCheckbox, gridBag);
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.gridx = 0; 
+		c.gridy = 0; //linha 0
+		add(changeColorCheckbox, c);
 
-		gridBag.gridy = 1; //linha 1
-		add(islandCheckbox, gridBag);
+		c.gridy = 1; //linha 1
+		add(islandCheckbox, c);
 		
-		gridBag.gridy = 2; 
-		add(Box.createRigidArea(new Dimension(50, 20)), gridBag);
+		c.gridy = 2; 
+		add(Box.createRigidArea(new Dimension(50, 20)), c);
 		
-		gridBag.gridy = 3; 
+		c.gridy = 3; 
 		sliderLabel = new JLabel("Tamanho do pincel", JLabel.CENTER);
-		add(sliderLabel, gridBag);
+		add(sliderLabel, c);
 		
-		gridBag.gridy = 4;
-		add(brushSizeSlider, gridBag);
+		c.gridy = 4;
+		add(brushSizeSlider, c);
 		
-		add(Box.createRigidArea(new Dimension(50, 50)), gridBag);
-		gridBag.gridy = 5;
+		add(Box.createRigidArea(new Dimension(50, 50)), c);
+		c.gridy = 5;
 		sliderLabel = new JLabel("Intensidade do pincel", JLabel.CENTER);
-		add(sliderLabel, gridBag);
+		add(sliderLabel, c);
 		
-		gridBag.gridy = 6;
-		add(brushWeightSlider, gridBag);
+		c.gridy = 6;
+		add(brushWeightSlider, c);
 		
-		gridBag.gridx = 1; 
-		gridBag.gridy = 0; 
-		add(Box.createRigidArea(new Dimension(50, 50)), gridBag);
+		c.gridx = 1; 
+		c.gridy = 0; 
+		add(Box.createRigidArea(new Dimension(50, 50)), c);
 		
 		/*		coluna 2		*/
-		gridBag.gridx = 1; //coluna 1
-		gridBag.gridy = 0; //linha 0
-		add(updateButton, gridBag);
+		c.gridx = 2; //coluna 1
+		c.gridy = 0; //linha 0
+		add(updateButton, c);
 		
-		gridBag.gridy = 1; 
-		add(generateSeedButton, gridBag);
+		c.gridy = 1; 
+		add(generateSeedButton, c);
 		
-		gridBag.gridy = 2; 
-		add(Box.createRigidArea(new Dimension(50, 20)), gridBag);
+		c.gridy = 2; 
+		add(Box.createRigidArea(new Dimension(50, 20)), c);
 		
-		gridBag.gridy = 3;
-		sliderLabel = new JLabel("Nível do mar", JLabel.CENTER);
-		add(sliderLabel, gridBag);
+		c.gridy = 3;
+		sliderLabel = new JLabel("Nï¿½vel do mar", JLabel.CENTER);
+		add(sliderLabel, c);
 		
-		gridBag.gridy = 4;
-		add(seaLevelSlider, gridBag);
+		c.gridy = 4;
+		add(seaLevelSlider, c);
 		
-		gridBag.gridy = 5;
+		c.gridy = 5;
 		sliderLabel = new JLabel("Zoom", JLabel.CENTER);
-		add(sliderLabel, gridBag);
+		add(sliderLabel, c);
 		
-		gridBag.gridy = 6;
-		add(zoomSlider, gridBag);
+		c.gridy = 6;
+		add(zoomSlider, c);
 		
-		gridBag.gridwidth = 0;
-		gridBag.gridx = 0;
-		gridBag.gridy = 6;
-		add(Box.createRigidArea(new Dimension(20, 50)), gridBag);
-		gridBag.gridy = 7;
-		add(seedInput, gridBag);
-		add(Box.createRigidArea(new Dimension(200, 50)), gridBag);
-		gridBag.gridy = 8;
-		add(colorChooser, gridBag);
+		c.gridwidth = 0;
+		c.gridx = 0;
+		c.gridy = 6;
+		add(Box.createRigidArea(new Dimension(20, 50)), c);
+		c.gridy = 7;
+		add(seedInput, c);
+		add(Box.createRigidArea(new Dimension(200, 50)), c);
+		c.gridy = 8;
+		add(colorChooser, c);
 		
-		gridBag.gridy = 9;
-		add(Box.createRigidArea(new Dimension(200, 50)), gridBag);
+		c.gridy = 9;
+		add(Box.createRigidArea(new Dimension(200, 50)), c);
 		
-		gridBag.gridwidth = 1;
-		gridBag.gridx = 0;
-		gridBag.gridy = 10;
-		add(openButton, gridBag);
-		gridBag.gridx = 1;
-		add(saveButton, gridBag);
+		c.gridwidth = 1;
+		c.gridx = 0;
+		c.gridy = 10;
+		add(openButton, c);
+		c.gridx = 2;
+		add(saveButton, c);
+		c.gridy = 11;
+		add(pngButton, c);
 
 	}
 
-	boolean isChangingColor() {
+	public boolean isChangingColor() {
 		return changeColorCheckbox.isSelected();
 	}
 
-	boolean isIsland() {
+	public boolean isIsland() {
 		return islandCheckbox.isSelected();
 	}
 
-	Color getSelectedColor() {
+	public Color getSelectedColor() {
 		return colorChooser.getColor();
 	}
 
-	float getSeaLevel() {
+	public float getSeaLevel() {
 		return seaLevelSlider.getValue() / ((float) sliderSize);
 	}
 
-	float getBrushSize() {
+	public float getBrushSize() {
 		float temp = (brushSizeSlider.getValue() + sliderSize) / ((float) sliderSize * 2);
 		temp *= 20;
 		temp = temp * temp;
@@ -217,16 +216,16 @@ import javax.swing.event.DocumentListener;
 
 	}
 
-	float getBrushWeight() {
+	public float getBrushWeight() {
 		return ((brushWeightSlider.getValue() + sliderSize) / ((float) sliderSize));
 	}
 
-	long getSeed() {
+	public long getSeed() {
 		String input = seedInput.getText();
 		return Long.parseLong(input, 36);
 	}
 
-	float getZoom() {
+	public float getZoom() {
 		float zeroToOne = (zoomSlider.getValue() / (float) (sliderSize * 2)) + 0.5f;
 		zeroToOne = (float) Math.pow(zeroToOne, 3);
 		float range = maxZoom - minZoom;
