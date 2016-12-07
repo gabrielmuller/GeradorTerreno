@@ -11,32 +11,32 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
 
-@SuppressWarnings("serial")
-public class Visualizer extends JPanel {
-	Image img;
+@SuppressWarnings("serial") 
+class Visualizer extends JPanel {
+	private Image img;
 	private int margin;
 	
 	Terrain terrain;
 	final Spectrum spectrum;
 	
 	
-	public Visualizer(Spectrum spectrum) {
+	Visualizer(Spectrum spectrum) {
 		margin = 20;
 		this.spectrum = spectrum;
 		setRenderingMode(true);
 	}
 	
-	public void addClickListener(Editor cc) {
+	void addClickListener(Editor cc) {
 		ClickTerrain list = new ClickTerrain(cc, this);
 		addMouseListener(list);
 
 
 	}
-	public void setRenderingMode(boolean b) {
+	void setRenderingMode(boolean b) {
 		spectrum.interpolate = b;
 	}
 	
-	public BufferedImage preview() {
+	BufferedImage preview() {
 		int size = terrain.size();
 		BufferedImage bufferedImage = new BufferedImage(size, size, BufferedImage.TYPE_INT_RGB);
 

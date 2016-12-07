@@ -1,12 +1,12 @@
 package main;
 
-public class PSeaLevel extends MatrixProcessor{
-	float seaLevel;
-	public PSeaLevel(float seaLevel) {
+class PSeaLevel extends MatrixProcessor{
+	private float seaLevel;
+	PSeaLevel(float seaLevel) {
 		this.seaLevel = seaLevel;
 	}
 
-	public void process() {
+	void process() {
 		output = Utility.changeZero(input, seaLevel);
 
 	}

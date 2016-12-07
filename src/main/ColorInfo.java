@@ -12,11 +12,11 @@ import java.awt.Color;
  *
  * @author 10505053950
  */
-public class ColorInfo {
-    public Color color;
-    public int index;
+class ColorInfo {
+    Color color;
+    int index;
     
-    public ColorInfo (Color color, int index) {
+    ColorInfo (Color color, int index) {
         this.color = color;
         this.index = index;
     }

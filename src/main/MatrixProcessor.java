@@ -1,6 +1,6 @@
 package main;
 
-public abstract class MatrixProcessor {
+abstract class MatrixProcessor {
 	float input;
 	float output;
 	int i, j;

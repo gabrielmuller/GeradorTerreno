@@ -7,12 +7,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 
-public class TerrainInput {
-	InputStream is;
-	DataInputStream dis;
-	ObjectInputStream ois;
+class TerrainInput {
+	private InputStream is;
+	private DataInputStream dis;
+	private ObjectInputStream ois;
 
-	public TerrainInput(String filename) {
+	TerrainInput(String filename) {
 		try {
 			is = new FileInputStream(filename);
 		} catch (FileNotFoundException e) {
@@ -26,7 +26,7 @@ public class TerrainInput {
 		}
 	}
 
-	public TerrainInfo fileToFloatMatrix(int size) {
+	TerrainInfo fileToFloatMatrix(int size) {
 		float[][] elevation = new float[size][size];
 		Spectrum spectrum = null;
 		try {

@@ -13,8 +13,10 @@ public class Main {
 		GridLayout layout = new GridLayout(1, 2);
 
 		frame.setLayout(layout);
+		
 		Interface i = new Interface();
 		frame.getContentPane().add(i);
+		
 		TerrainCreator tc = new TerrainCreator(i);
 		frame.getContentPane().add(tc.visualizer);
 

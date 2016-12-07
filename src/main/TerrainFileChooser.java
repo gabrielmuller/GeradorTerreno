@@ -3,9 +3,10 @@ package main;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-public class TerrainFileChooser extends JFileChooser {
+@SuppressWarnings("serial") 
+class TerrainFileChooser extends JFileChooser {
 
-	public TerrainFileChooser(boolean open) {
+	TerrainFileChooser(boolean open) {
 		super();
 		setFileFilter(new FileNameExtensionFilter("Terreno (.ter)", "ter"));
 		
