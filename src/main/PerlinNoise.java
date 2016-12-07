@@ -53,7 +53,7 @@ class PerlinNoise {
 		// you will see.
 		
 		//codigo adicionado
-		iters = (int) Math.floor(Math.log(width) / Math.log(2))-2;
+		iters = (int) Math.floor(Math.log(width) / Math.log(2));
 		randomLocations = new Point[iters];
 		for (int i = 0; i < randomLocations.length; i++) {
 			randomLocations[i] = new Point(random.nextInt(this.width), random.nextInt(this.width));
@@ -64,11 +64,10 @@ class PerlinNoise {
 	//codigo adicionado
 	float fractalNoise(float x, float y) {
 		float output = 0;
-
 		for (int i = 0; i < iters - 1; i++) {
 			float tx = x + randomLocations[i].x;
 			float ty = y + randomLocations[i].y;
-			float scale = (float) Math.pow(2, iters - i);
+			float scale = (float) Math.pow(2, iters - i - 2);
 			float ratio = (float) Math.pow(2, -i);
 			output += noise(tx / scale, ty / scale) * ratio;
 		}
