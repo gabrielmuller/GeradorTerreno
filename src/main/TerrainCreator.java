@@ -117,7 +117,7 @@ class TerrainCreator {
 		to.writeFile(fixedTerrain.elevation, visualizer.spectrum);
 	}
 	
-	public void savePng() {
+	private void savePng() {
 		JFileChooser jfc = new TerrainFileChooser(false);
 		
 		if (jfc.showOpenDialog(null) != JFileChooser.APPROVE_OPTION)
@@ -155,7 +155,7 @@ class TerrainCreator {
 			visualizer.spectrum.clone(tinfo.spectrum);
 			update(t);
 		} else {
-			JOptionPane.showMessageDialog(null, "Arquivo inv�lido. Selecione um arquivo tipo .ter .");
+			JOptionPane.showMessageDialog(null, "Arquivo invalido. Selecione um arquivo tipo .ter .");
 		}
 		
 	}
@@ -165,8 +165,7 @@ class TerrainCreator {
         island = interf.isIsland();
         zoom = interf.getZoom();
         map = new PerlinNoise(size, size, seed);
-
-        Terrain t = new Terrain (size);
+		Terrain t = new Terrain (size);
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
             	t.setHeightAt(valueAtPoint(i,j), i, j);
@@ -206,24 +205,14 @@ class TerrainCreator {
 	}
 
 	private float islandPoint(int i, int j) {
-		// return mapa.fractalNoise(i, j);
 		int center = size / 2;
 		int distI = i - center;
 		int distJ = j - center;
 		float distanceToCenter = (float) Math.sqrt(distI * distI + distJ * distJ);
 		distanceToCenter /= center;
-		distanceToCenter = clamp(distanceToCenter);
+		distanceToCenter = Utility.clamp(distanceToCenter, -1f, 1f);
 		float centerWeight = 1f;
 		return ((map.fractalNoise(i, j, zoom) + 1) / 2 - distanceToCenter * centerWeight);
-	}
-
-	private float clamp(float f) {
-		if (f > 1) {
-			f = 1;
-		} else if (f < -1) {
-			f = -1;
-		}
-		return f;
 	}
 
 }
