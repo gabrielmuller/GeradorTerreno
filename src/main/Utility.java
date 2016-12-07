@@ -1,12 +1,12 @@
 package main;
 
-public final class Utility {
+final class Utility {
 	
-	public static int twosComplement (int i) {
+	static int twosComplement (int i) {
 		return (i+1)*(-1);
 	}
         
-        public static float changeZero (float value, float zero) {
+        static float changeZero (float value, float zero) {
             value -= zero;
             if (value < 0) {
                 value /= (1+zero);
@@ -16,7 +16,7 @@ public final class Utility {
             return value;
         }
         
-        public static float clamp(float value, float min, float max) {
+        static float clamp(float value, float min, float max) {
         	if (value > max) {
         		value = max;
         	} else if (value < min) {

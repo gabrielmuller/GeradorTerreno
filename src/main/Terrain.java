@@ -1,13 +1,13 @@
 package main;
 
-public class Terrain {
+class Terrain {
 	float[][] elevation;
 	
-	public Terrain(int size) {
+	Terrain(int size) {
 		elevation = new float[size][size];
 	}
 	
-	public boolean setHeightAt(float height, int i, int j) {
+	boolean setHeightAt(float height, int i, int j) {
 		boolean output = false;
 		if (height >= -1 && height <= 1) {
 			elevation[i][j] = height;
@@ -16,10 +16,10 @@ public class Terrain {
 		return output;
 	}
 	
-	public float getHeightAt(int i, int j) {
+	float getHeightAt(int i, int j) {
 		return elevation[i][j];
 	}
-	public void iterate(MatrixProcessor processor) {
+	private void iterate(MatrixProcessor processor) {
 		for (int i = 0; i < elevation.length; i++) {
 			for (int j = 0; j < elevation.length; j++) {
 				processor.input = elevation[i][j];
@@ -31,36 +31,36 @@ public class Terrain {
 		}
 	}
 	
-	public float largestValue() {
+	private float largestValue() {
 		PLargest processor = new PLargest();
 		iterate(processor);
 		return processor.largest;
 	}
 	
-	public float smallestValue() {
+	private float smallestValue() {
 		PSmallest processor = new PSmallest();
 		iterate(processor);
 		return processor.smallest;
 	}
 	
-	public void normalize () {
+	void normalize () {
 		PNormalizer processor = new PNormalizer(smallestValue(), largestValue());
 		iterate(processor);
 	}
 	
-	public void level(float level) {
+	void level(float level) {
 		PSeaLevel processor = new PSeaLevel(level);
 		iterate(processor);
 	}
 	
-	public void edit (float radius, float maxChange, Point center) {
+	void edit (float radius, float maxChange, Point center) {
 		PEdit processor = new PEdit(radius, maxChange, center);
 		iterate(processor);
 	}
-	public int size () {
+	int size () {
 		return elevation.length;
 	}
-	/*public float getHeightAt(int i, int j) {
+	/*float getHeightAt(int i, int j) {
 		return elevation[i][j];
 	}*/
 

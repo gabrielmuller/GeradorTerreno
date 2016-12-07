@@ -1,17 +1,17 @@
 package main;
 
-public class Editor {
+class Editor {
 	private Interface interf;
 	private Spectrum spectrum;
 	private TerrainCreator tc;
 
-	public Editor(Interface interf, Spectrum spectrum, TerrainCreator tc) {
+	Editor(Interface interf, Spectrum spectrum, TerrainCreator tc) {
 		this.spectrum = spectrum;
 		this.tc = tc;
 		this.interf = interf;
 	}
 
-	public void edit(int i, int j, boolean negative) {
+	void edit(int i, int j, boolean negative) {
 		i -= tc.margin;
 		j -= tc.margin;
 		i /= 2;

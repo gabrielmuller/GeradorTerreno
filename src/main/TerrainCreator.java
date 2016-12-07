@@ -1,32 +1,30 @@
 package main;
 
 import java.awt.Color;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
-public class TerrainCreator {
+class TerrainCreator {
 
-	Interface interf;
+	private Interface interf;
 	Visualizer visualizer;
-	float zoom;
-	long seed;
-	Image img;
-	float seaLevel;
-	PerlinNoise map;
+	private float zoom;
+	private long seed;
+	
+	
+	private PerlinNoise map;
 	int size;
-	boolean island;
-	public int margin;
+	private boolean island;
+	int margin;
 
-	boolean fixed;
+	
 	Terrain fixedTerrain;
 	
-	public TerrainCreator (Interface i) {
+	TerrainCreator (Interface i) {
 		this.interf = i;
 		interf.changeColorCheckbox.addActionListener(new ActionListener() {
 
@@ -76,10 +74,8 @@ public class TerrainCreator {
 
 		});
 		
-		fixed = false;
 		size = 300;
 		margin = 20;
-		seaLevel = 0;
 		Color[] pos = { new Color(239, 235, 201), new Color(115, 196, 78), new Color(237, 247, 255)};
 		Color[] neg = { new Color(110, 173, 221), new Color(22, 58, 86)};
 		Spectrum spectrum = new Spectrum(neg, pos);
@@ -94,7 +90,7 @@ public class TerrainCreator {
 
 	}
 
-	public void saveTerrain() {
+	private void saveTerrain() {
 		JFileChooser jfc = new TerrainFileChooser(false);
 		
 		if (jfc.showOpenDialog(null) != JFileChooser.APPROVE_OPTION)
@@ -121,7 +117,7 @@ public class TerrainCreator {
 		p.save(visualizer.preview());
 	}
 	
-	public void loadTerrain() {
+	private void loadTerrain() {
 		
 		JFileChooser jfc = new TerrainFileChooser(true);
 		
@@ -144,12 +140,11 @@ public class TerrainCreator {
 		
 	}
 
-	Terrain createTerrain() {
+	private Terrain createTerrain() {
         seed = interf.getSeed();
         island = interf.isIsland();
         zoom = interf.getZoom();
         map = new PerlinNoise(size, size, seed);
-		seaLevel = interf.getSeaLevel();
 
         Terrain t = new Terrain (size);
         for (int i = 0; i < size; i++) {
@@ -164,18 +159,18 @@ public class TerrainCreator {
 
     }
 
-	public void update() {
+	private void update() {
 		update(createTerrain());
 	}
 	
-	public void update(Terrain t) {
+	void update(Terrain t) {
 		fixedTerrain = t;
 		visualizer.terrain = fixedTerrain;
 		visualizer.preview();
 
 	}
 
-	public float valueAtPoint(int i, int j) {
+	private float valueAtPoint(int i, int j) {
 		float output;
 		if (island) {
 			output = islandPoint(i, j);

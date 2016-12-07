@@ -3,16 +3,15 @@ package main;
 import java.awt.Color;
 import java.io.Serializable;
 
-@SuppressWarnings("serial")
-public class Spectrum implements Serializable {
+@SuppressWarnings("serial") class Spectrum implements Serializable {
 
     private Color[] positiveColors;
     private Color[] negativeColors;
-    public float seaLevel;
+    
 
-    public boolean interpolate;
+    boolean interpolate;
 
-    public Spectrum(Color[] n, Color[] p) {
+    Spectrum(Color[] n, Color[] p) {
         negativeColors = n;
         positiveColors = p;
     }
@@ -21,7 +20,7 @@ public class Spectrum implements Serializable {
     	this.positiveColors = s.positiveColors;
     	this.negativeColors = s.negativeColors;
     }
-    public ColorInfo colorAtHeight(float height) {
+    ColorInfo colorAtHeight(float height) {
         Color[] colors;
 
         if (height < 0) {
@@ -57,7 +56,7 @@ public class Spectrum implements Serializable {
         return new ColorInfo(result, index);
     }
 
-    public void changeColor(int index, Color color) {
+    void changeColor(int index, Color color) {
         Color[] colors;
         if (index < 0) {
             index = Utility.twosComplement(index);
@@ -69,7 +68,7 @@ public class Spectrum implements Serializable {
         colors[index] = color;
     }
 
-    public static Color colorInterpolate(Color a, Color b, float f) {
+    private static Color colorInterpolate(Color a, Color b, float f) {
         float[] aInFloats = Spectrum.colorToArray(a);
         float[] bInFloats = Spectrum.colorToArray(b);
         float[] resultInFloats = new float[3];

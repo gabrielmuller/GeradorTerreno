@@ -1,19 +1,19 @@
 package main;
 import java.util.Random;
 
-public class PerlinNoise {
+class PerlinNoise {
 
    // Just a Random class object so I can fill my noise map with random directions.
-   public final Random random;
+   private final Random random;
 
    // Width and Height of the map.
-   public int width, height;
+   private int width, height;
 
    // Random directions of length 1.
    private vec2[] values;
 
    // Contrast value.
-   public float contrast = 1;
+   private float contrast = 1;
    
    private int canvasWidth = 0, canvasHeight = 0;
    
@@ -22,7 +22,7 @@ public class PerlinNoise {
     * @param width of the noise map.
     * @param height of the noise map.
     */
-   public PerlinNoise(int width, int height, long seed) {
+   PerlinNoise(int width, int height, long seed) {
       random = new Random(seed);
       this.width = width;
       this.height = height;
@@ -43,11 +43,8 @@ public class PerlinNoise {
       
    }
    
-   public void setCanvas(int w, int h) {
-      this.canvasWidth = w;
-      this.canvasHeight = h;
-   }
-   public float fractalNoise(float x, float y, float zoom) {
+
+   float fractalNoise(float x, float y, float zoom) {
 	   float resultado = 0;
 	   int iters = (int) Math.floor(Math.log(width)/Math.log(2));
 	   for (int i = 0; i < iters-1; i++) {
@@ -58,7 +55,7 @@ public class PerlinNoise {
 	   }
 	   return resultado;
    }
-   public float noise(float x, float y) {
+   private float noise(float x, float y) {
 
       if(canvasWidth != 0 && canvasHeight != 0) {
          x /= canvasWidth * width;
@@ -147,30 +144,23 @@ public class PerlinNoise {
       return values[x + y * width];
    }
 
-   public static class vec2 {
+   private static class vec2 {
 
-      public float x, y;
+      float x, y;
 
       /**
        * Just holds some float values.
        * @param x
        * @param y
        */
-      public vec2(float x, float y) {
+      private vec2(float x, float y) {
          this.x = x;
          this.y = y;
       }
       
-      public int getX() {
-         return (int) x;
-      }
-      public int getY() {
-         return (int) y;
-      }
-      
    }
    
-   public static class Rotation {
+   private static class Rotation {
 
       /** 
        * Rotates specified point around pivot.
@@ -179,7 +169,7 @@ public class PerlinNoise {
        * @param rotation - how many degrees to rotate.
        * @return a new point, which was created by rotating given point around pivot by some degrees.
        */
-      public static vec2 point(vec2 pivot, vec2 point, float rotation) {
+      private static vec2 point(vec2 pivot, vec2 point, float rotation) {
          
          float rot = (float)(1f / 180 * rotation * Math.PI);
          

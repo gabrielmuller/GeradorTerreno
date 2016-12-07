@@ -17,14 +17,15 @@ import javax.swing.SwingUtilities;
  *
  * @author 10505053950
  */
-public class ClickTerrain implements MouseListener {
-    Editor editor;
-    Visualizer mainTerrain;
+class ClickTerrain implements MouseListener {
+    private Editor editor;
+    private Visualizer mainTerrain;
     
-    public ClickTerrain(Editor editor, Visualizer mainTerrain) {
+    ClickTerrain(Editor editor, Visualizer mainTerrain) {
         this.editor = editor;
         this.mainTerrain = mainTerrain;
     }
+    
     @Override
     public void mouseClicked(MouseEvent e) {
         PointerInfo a = MouseInfo.getPointerInfo();

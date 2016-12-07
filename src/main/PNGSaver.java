@@ -6,10 +6,10 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class PNGSaver {
-	String filename;
+class PNGSaver {
+	private String filename;
 
-	public PNGSaver(String filename) {
+	PNGSaver(String filename) {
 		this.filename = filename;
 	}
 	

@@ -6,12 +6,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 
-public class TerrainOutput {
-	FileOutputStream fos;
-	DataOutputStream dos;
-	ObjectOutputStream oos;
+class TerrainOutput {
+	private FileOutputStream fos;
+	private DataOutputStream dos;
+	private ObjectOutputStream oos;
 	
-	public TerrainOutput(String filename) {
+	TerrainOutput(String filename) {
 		try {
 			fos = new FileOutputStream(filename);
 		} catch (FileNotFoundException e) {
@@ -25,7 +25,7 @@ public class TerrainOutput {
 		}
 	}
 
-	public void writeFile(float[][] elevation, Spectrum palette) {
+	void writeFile(float[][] elevation, Spectrum palette) {
 		try {
 			for (int i = 0; i < elevation.length; i++) {
 				for (int j = 0; j < elevation[0].length; j++) {
