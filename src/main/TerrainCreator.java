@@ -7,12 +7,12 @@ import java.io.File;
 
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 class TerrainCreator {
 
 	private Interface interf;
 	Visualizer visualizer;
-	private float zoom;
 	private long seed;
 	
 	
@@ -118,7 +118,9 @@ class TerrainCreator {
 	}
 	
 	private void savePng() {
-		JFileChooser jfc = new TerrainFileChooser(false);
+		JFileChooser jfc = new JFileChooser();
+		jfc.setFileFilter(new FileNameExtensionFilter("Imagem PNG", "png"));
+		jfc.setApproveButtonText("Exportar");
 		
 		if (jfc.showOpenDialog(null) != JFileChooser.APPROVE_OPTION)
 			return;
@@ -130,9 +132,11 @@ class TerrainCreator {
 		if (path.contains(".")){
 			int index = path.indexOf(".");
 			path = path.substring(0, index);
-			path = path.concat(".png");
 		}
 		
+		path = path.concat(".png");
+
+				
 		PNGSaver p = new PNGSaver(path);
 		p.save(visualizer.preview());
 	}
@@ -163,8 +167,7 @@ class TerrainCreator {
 	private Terrain createTerrain() {
         seed = interf.getSeed();
         island = interf.isIsland();
-        zoom = interf.getZoom();
-        map = new PerlinNoise(size, size, seed);
+        map = new PerlinNoise (size*2, size*2, seed);
 		Terrain t = new Terrain (size);
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
@@ -201,7 +204,7 @@ class TerrainCreator {
 	}
 
 	private float continentPoint(int i, int j) {
-		return map.fractalNoise(i, j, zoom);
+		return map.fractalNoise(i, j);
 	}
 
 	private float islandPoint(int i, int j) {
@@ -212,7 +215,7 @@ class TerrainCreator {
 		distanceToCenter /= center;
 		distanceToCenter = Utility.clamp(distanceToCenter, -1f, 1f);
 		float centerWeight = 1f;
-		return ((map.fractalNoise(i, j, zoom) + 1) / 2 - distanceToCenter * centerWeight);
+		return ((map.fractalNoise(i, j) + 1) / 2 - distanceToCenter * centerWeight);
 	}
 
 }

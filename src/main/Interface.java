@@ -19,32 +19,30 @@ import javax.swing.event.DocumentListener;
  *
  * @author 10505053950
  */
-@SuppressWarnings("serial")
-public class Interface extends JPanel {
+@SuppressWarnings("serial") class Interface extends JPanel {
 
 	JCheckBox changeColorCheckbox, islandCheckbox;
-	JColorChooser colorChooser;
-	JSlider seaLevelSlider, zoomSlider, brushSizeSlider, brushWeightSlider;
-	JLabel sliderLabel;
-	JButton updateButton, generateSeedButton, openButton, saveButton, pngButton;
-	JTextField seedInput;
-	float minZoom = 0.3f;
-	float maxZoom = 3f;
-	String oldInput;
-	int sliderSize = 100;
+	private JColorChooser colorChooser;
+	private JSlider seaLevelSlider, brushSizeSlider, brushWeightSlider;
+	private JLabel sliderLabel;
+	JButton updateButton, openButton, saveButton, pngButton;
+	private JButton generateSeedButton;
+	private JTextField seedInput;
+	private float minZoom = 0.3f;
+	private float maxZoom = 3f;
+	private String oldInput;
+	private int sliderSize = 100;
 
 	public Interface() {
 		super(new GridBagLayout());
-		GridBagConstraints c = new GridBagConstraints();
+		GridBagConstraints grid = new GridBagConstraints();
 
 		colorChooser = new JColorChooser();
-		//colorChooser.setPreviewPanel(new JPanel());
 		
 		changeColorCheckbox = new JCheckBox();
 		islandCheckbox = new JCheckBox();
 
 		seaLevelSlider = new JSlider(-sliderSize, sliderSize, 0);
-		zoomSlider = new JSlider(-sliderSize, sliderSize, 0);
 		brushSizeSlider = new JSlider(-sliderSize, sliderSize, 0);
 		brushWeightSlider = new JSlider(-sliderSize, sliderSize, 0);
 		
@@ -113,102 +111,96 @@ public class Interface extends JPanel {
 		 */
 		
 		/*		coluna 0		*/
-		c.fill = GridBagConstraints.HORIZONTAL;
-		c.gridx = 0; 
-		c.gridy = 0; //linha 0
-		add(changeColorCheckbox, c);
+		grid.fill = GridBagConstraints.HORIZONTAL;
+		grid.gridx = 0; 
+		grid.gridy = 0; //linha 0
+		add(changeColorCheckbox, grid);
 
-		c.gridy = 1; //linha 1
-		add(islandCheckbox, c);
+		grid.gridy = 1; //linha 1
+		add(islandCheckbox, grid);
 		
-		c.gridy = 2; 
-		add(Box.createRigidArea(new Dimension(50, 20)), c);
+		grid.gridy = 2; 
+		add(Box.createRigidArea(new Dimension(50, 20)), grid);
 		
-		c.gridy = 3; 
+		grid.gridy = 3; 
 		sliderLabel = new JLabel("Tamanho do pincel", JLabel.CENTER);
-		add(sliderLabel, c);
+		add(sliderLabel, grid);
 		
-		c.gridy = 4;
-		add(brushSizeSlider, c);
+		grid.gridy = 4;
+		add(brushSizeSlider, grid);
 		
-		add(Box.createRigidArea(new Dimension(50, 50)), c);
-		c.gridy = 5;
+		add(Box.createRigidArea(new Dimension(50, 50)), grid);
+		grid.gridy = 5;
 		sliderLabel = new JLabel("Intensidade do pincel", JLabel.CENTER);
-		add(sliderLabel, c);
+		add(sliderLabel, grid);
 		
-		c.gridy = 6;
-		add(brushWeightSlider, c);
+		grid.gridy = 6;
+		add(brushWeightSlider, grid);
 		
-		c.gridx = 1; 
-		c.gridy = 0; 
-		add(Box.createRigidArea(new Dimension(50, 50)), c);
+		grid.gridx = 1; 
+		grid.gridy = 0; 
+		add(Box.createRigidArea(new Dimension(50, 50)), grid);
 		
 		/*		coluna 2		*/
-		c.gridx = 2; //coluna 1
-		c.gridy = 0; //linha 0
-		add(updateButton, c);
+		grid.gridx = 2; //coluna 1
+		grid.gridy = 0; //linha 0
+		add(updateButton, grid);
 		
-		c.gridy = 1; 
-		add(generateSeedButton, c);
+		grid.gridy = 1; 
+		add(generateSeedButton, grid);
 		
-		c.gridy = 2; 
-		add(Box.createRigidArea(new Dimension(50, 20)), c);
+		grid.gridy = 2; 
+		add(Box.createRigidArea(new Dimension(50, 20)), grid);
 		
-		c.gridy = 3;
-		sliderLabel = new JLabel("N�vel do mar", JLabel.CENTER);
-		add(sliderLabel, c);
+		grid.gridy = 3;
+		sliderLabel = new JLabel("Nivel do mar", JLabel.CENTER);
+		add(sliderLabel, grid);
 		
-		c.gridy = 4;
-		add(seaLevelSlider, c);
+		grid.gridy = 4;
+		add(seaLevelSlider, grid);
 		
-		c.gridy = 5;
-		sliderLabel = new JLabel("Zoom", JLabel.CENTER);
-		add(sliderLabel, c);
+			
+		grid.gridwidth = 0;
+		grid.gridx = 0;
+		grid.gridy = 6;
+		add(Box.createRigidArea(new Dimension(20, 50)), grid);
+		grid.gridy = 7;
+		add(seedInput, grid);
+		add(Box.createRigidArea(new Dimension(200, 50)), grid);
+		grid.gridy = 8;
+		add(colorChooser, grid);
 		
-		c.gridy = 6;
-		add(zoomSlider, c);
+		grid.gridy = 9;
+		add(Box.createRigidArea(new Dimension(200, 50)), grid);
 		
-		c.gridwidth = 0;
-		c.gridx = 0;
-		c.gridy = 6;
-		add(Box.createRigidArea(new Dimension(20, 50)), c);
-		c.gridy = 7;
-		add(seedInput, c);
-		add(Box.createRigidArea(new Dimension(200, 50)), c);
-		c.gridy = 8;
-		add(colorChooser, c);
-		
-		c.gridy = 9;
-		add(Box.createRigidArea(new Dimension(200, 50)), c);
-		
-		c.gridwidth = 1;
-		c.gridx = 0;
-		c.gridy = 10;
-		add(openButton, c);
-		c.gridx = 2;
-		add(saveButton, c);
-		c.gridy = 11;
-		add(pngButton, c);
+		grid.gridwidth = 1;
+		grid.gridx = 0;
+		grid.gridy = 10;
+		add(openButton, grid);
+		grid.gridx = 2;
+		add(saveButton, grid);
+		grid.gridy = 11;
+		add(pngButton, grid);
 
 	}
 
-	public boolean isChangingColor() {
+	boolean isChangingColor() {
 		return changeColorCheckbox.isSelected();
 	}
 
-	public boolean isIsland() {
+	boolean isIsland() {
 		return islandCheckbox.isSelected();
 	}
 
-	public Color getSelectedColor() {
+	Color getSelectedColor() {
 		return colorChooser.getColor();
 	}
 
-	public float getSeaLevel() {
+	float getSeaLevel() {
 		return seaLevelSlider.getValue() / ((float) sliderSize);
 	}
 
-	public float getBrushSize() {
+	float getBrushSize() {
 		float temp = (brushSizeSlider.getValue() + sliderSize) / ((float) sliderSize * 2);
 		temp *= 20;
 		temp = temp * temp;
@@ -216,21 +208,12 @@ public class Interface extends JPanel {
 
 	}
 
-	public float getBrushWeight() {
+	float getBrushWeight() {
 		return ((brushWeightSlider.getValue() + sliderSize) / ((float) sliderSize));
 	}
 
-	public long getSeed() {
+	long getSeed() {
 		String input = seedInput.getText();
 		return Long.parseLong(input, 36);
-	}
-
-	public float getZoom() {
-		float zeroToOne = (zoomSlider.getValue() / (float) (sliderSize * 2)) + 0.5f;
-		zeroToOne = (float) Math.pow(zeroToOne, 3);
-		float range = maxZoom - minZoom;
-		zeroToOne *= range;
-		zeroToOne += minZoom;
-		return zeroToOne;
 	}
 }

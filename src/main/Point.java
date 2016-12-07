@@ -1,7 +1,7 @@
 package main;
 
 class Point {
-	private float x, y;
+	float x, y;
 
 	Point(float x, float y) {
 		super();
