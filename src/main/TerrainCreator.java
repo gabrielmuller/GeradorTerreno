@@ -14,7 +14,9 @@ class TerrainCreator {
 	private Interface interf;
 	Visualizer visualizer;
 	private long seed;
-	
+	private PNGSaver pngSaver;
+	private TerrainOutput to;
+	private TerrainInput ti;
 	
 	private PerlinNoise map;
 	int size;
@@ -113,7 +115,7 @@ class TerrainCreator {
 		if (!path.endsWith(".ter")) {
 			path = path + ".ter";
 		}
-		TerrainOutput to = new TerrainOutput(path);
+		to = new TerrainOutput(path);
 		to.writeFile(fixedTerrain.elevation, visualizer.spectrum);
 	}
 	
@@ -152,7 +154,7 @@ class TerrainCreator {
 		
 
 		if (input.toString().endsWith(".ter")) {
-			TerrainInput ti = new TerrainInput(input.getAbsolutePath());
+			ti = new TerrainInput(input.getAbsolutePath());
 			Terrain t = new Terrain(size);
 			TerrainInfo tinfo = ti.fileToFloatMatrix(fixedTerrain.size());
 			t.elevation = tinfo.elevation;

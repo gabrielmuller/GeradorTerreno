@@ -48,10 +48,6 @@ class Visualizer extends JPanel {
 				
 			}
 		}
-		/*teste
-			PNGSaver p = new PNGSaver("C:/teste/teste.png");
-			p.save(bufferedImage);
-		*/
 		img = bufferedImage;
 		repaint();
 		return bufferedImage;

@@ -7,7 +7,6 @@ import java.io.Serializable;
 
     private Color[] positiveColors;
     private Color[] negativeColors;
-    
 
     boolean interpolate;
 
