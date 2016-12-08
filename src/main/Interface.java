@@ -28,8 +28,8 @@ import javax.swing.event.DocumentListener;
 	JButton updateButton, openButton, saveButton, pngButton;
 	private JButton generateSeedButton;
 	private JTextField seedInput;
-	private float minZoom = 0.3f;
-	private float maxZoom = 3f;
+	//private float minZoom = 0.3f;
+	//private float maxZoom = 3f;
 	private String oldInput;
 	private int sliderSize = 100;
 
